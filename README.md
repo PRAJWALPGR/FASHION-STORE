@@ -699,6 +699,57 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 </script>
-    
+<script>
+    export const products = [
+    {
+        id: 1,
+        name: "Summer Floral Dress",
+        price: 59.99,
+        image: "https://images.unsplash.com/photo-1515372039744-b8f02a3ae446"
+    },
+    {
+        id: 2,
+        name: "Classic White Shirt",
+        price: 34.99,
+        image: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f"
+    },
+    {
+        id: 3,
+        name: "Slim Fit Denim Jeans",
+        price: 79.99,
+        image: "https://images.unsplash.com/photo-1542272454315-4c01d7abdf4a"
+    },
+    {
+        id: 4,
+        name: "Vintage Leather Jacket",
+        price: 129.99,
+        image: "https://images.unsplash.com/photo-1551028719-00167b16eac5"
+    },
+    {
+        id: 5,
+        name: "Boho Maxi Dress",
+        price: 89.99,
+        image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c"
+    },
+    {
+        id: 6,
+        name: "Casual Striped Tee",
+        price: 24.99,
+        image: "https://images.unsplash.com/photo-1503341504253-dff4815485f1"
+    },
+    {
+        id: 7,
+        name: "High-Waist Skirt",
+        price: 49.99,
+        image: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa"
+    },
+    {
+        id: 8,
+        name: "Designer Sunglasses",
+        price: 159.99,
+        image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083"
+    }
+];
+</script>  
 </body>
 </html>
