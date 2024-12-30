@@ -603,7 +603,102 @@ section h2 {
             </div>
         </div>
     </footer>
+<script>
+    import { products } from './products.js';
+import { addToCart } from './cart.js';
+import { showNotification } from './utils.js';
 
+// DOM Elements
+const newArrivalsContainer = document.getElementById('new-arrivals-container');
+const trendingContainer = document.getElementById('trending-container');
+const newsletterForm = document.getElementById('newsletter-form');
+const cartIcon = document.querySelector('.cart-icon');
+const searchInput = document.querySelector('.search-bar input');
 
+// Load new arrivals (first 4 products)
+function loadNewArrivals() {
+    if (!newArrivalsContainer) return;
+    const newArrivals = products.slice(0, 4);
+    renderProducts(newArrivals, newArrivalsContainer);
+}
+
+// Load trending products (last 4 products)
+function loadTrendingProducts() {
+    if (!trendingContainer) return;
+    const trending = products.slice(-4);
+    renderProducts(trending, trendingContainer);
+}
+
+// Render products to container
+function renderProducts(products, container) {
+    container.innerHTML = products.map(product => `
+        <div class="product-card">
+            <img src="${product.image}" alt="${product.name}" class="product-image">
+            <div class="product-info">
+                <h3 class="product-title">${product.name}</h3>
+                <p class="product-price">$${product.price}</p>
+                <button class="btn primary" onclick="window.handleAddToCart(${product.id})">
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Handle add to cart
+window.handleAddToCart = function(productId) {
+    const product = products.find(p => p.id === productId);
+    if (product) {
+        addToCart(product);
+        showNotification('Product added to cart!');
+    }
+}
+
+// Handle cart icon click
+cartIcon?.addEventListener('click', () => {
+    window.location.href = '/cart.html';
+});
+
+// Handle newsletter subscription
+newsletterForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = e.target.querySelector('input[type="email"]').value;
+    showNotification('Thank you for subscribing!');
+    e.target.reset();
+});
+
+// Handle search
+searchInput?.addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const filteredProducts = products.filter(product => 
+        product.name.toLowerCase().includes(searchTerm)
+    );
+    
+    if (newArrivalsContainer) {
+        renderProducts(filteredProducts.slice(0, 4), newArrivalsContainer);
+    }
+    if (trendingContainer) {
+        renderProducts(filteredProducts.slice(-4), trendingContainer);
+    }
+});
+
+// Initialize the page
+loadNewArrivals();
+loadTrendingProducts();
+
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+</script>
+    
 </body>
 </html>
